@@ -1,14 +1,25 @@
-import express from "express";
-import router from "./router/router.js";
+import express  from 'express';
+import mongoose from 'mongoose';
+import router from './router/router.js';
+import env from 'dotenv'
 
+
+env.config()
 const PORT = process.env.PORT || 3000
 
-const app = express()
 
+const app = express();
+app.set('view engine', 'ejs');
+// middleware
+app.use(express.static('public'));
 app.use(express.json())
+app.use('/' , router)
+// view engine
+app.set('view engine', 'ejs');
 
-app.use('/', router)
+// database connection
 
-app.listen(PORT, ()=> {
-    console.log(`listening on port ${PORT}`)
+
+app.listen(PORT , ()=> {
+    console.log(`Listening on port ${PORT}`)
 })
