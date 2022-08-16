@@ -12,7 +12,7 @@ export default async function autheticationChecker(req, res, next) {
         res.redirect("/login"); // if we get error/ jwt is not valid redirect uesr to login page
       } else {
         console.log("valid token");
-        next();
+        next(); // else open requeted page
       }
     });
   } else {

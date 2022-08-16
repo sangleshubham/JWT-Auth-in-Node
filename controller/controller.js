@@ -37,6 +37,7 @@ export function getSignup(req, res) {
 }
 
 export function getLogin(req, res) {
+  console.log(req.body)
   res.render("login");
 }
 
