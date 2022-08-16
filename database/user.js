@@ -40,4 +40,21 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
+UserSchema.statics.login = async function(email, password) {
+
+  const userDetails = await this.findOne({email: email}) // check if mail exist
+
+  if(userDetails)     // check if mail exist
+  {
+    if (await bcrypt.compare(password , userDetails.password)) // compare user plain password with stored encrypted password
+    {
+      return userDetails
+    }
+    throw Error('Password do not match')
+  }
+  throw Error('User not found')
+
+}
+
+
 export default mongoose.model("user", UserSchema); // schema name must be sigular, created collection will have 's' at the end
